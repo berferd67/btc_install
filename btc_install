@@ -1,0 +1,11 @@
+#!/bin/sh
+echo Enter full version number: e.g. 0.17.0
+read VER
+rm -rf bitcoin-$VER*
+bitcoin-cli stop
+sleep 5m
+wget https://bitcoin.org/bin/bitcoin-core-$VER/bitcoin-$VER-x86_64-linux-gnu.tar.gz
+tar xzf bitcoin-$VER-x86_64-linux-gnu.tar.gz
+sudo install -m 0755 -o root -g root -t /usr/local/bin bitcoin-$VER/bin/*
+rm -rf bitcoin-$VER*
+bitcoind -daemon
